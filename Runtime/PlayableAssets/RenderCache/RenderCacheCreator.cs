@@ -4,6 +4,11 @@ namespace UnityEngine.StreamingImageSequence {
 
 internal class RenderCacheCreator : MonoBehaviour {
 
+    internal bool IsInitialized() {
+        return null != m_camera && null != m_director;
+    }
+    
+//----------------------------------------------------------------------------------------------------------------------
     internal PlayableDirector GetDirector() { return m_director;}
     internal Camera           GetCamera()   { return m_camera;}
     internal void SetDirector(PlayableDirector director) { m_director = director;}
