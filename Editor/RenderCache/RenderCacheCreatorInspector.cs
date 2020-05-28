@@ -7,14 +7,14 @@ using UnityEngine.UIElements;
 namespace UnityEditor.StreamingImageSequence {
 
 /// <summary>
-/// The inspector of RenderCachePlayableAsset
+/// The inspector of RenderCacheCreator
 /// </summary>
-[CustomEditor(typeof(RenderCachePlayableAsset))]
+[CustomEditor(typeof(RenderCacheCreator))]
 internal class RenderCachePlayableAssetInspector : Editor {
 
 //----------------------------------------------------------------------------------------------------------------------
     void OnEnable() {
-        m_asset = target as RenderCachePlayableAsset;
+        m_asset = target as RenderCacheCreator;
     }
 
     
@@ -29,7 +29,7 @@ internal class RenderCachePlayableAssetInspector : Editor {
 
 
 //----------------------------------------------------------------------------------------------------------------------
-    private RenderCachePlayableAsset m_asset = null;
+    private RenderCacheCreator m_asset = null;
 
 }
 
