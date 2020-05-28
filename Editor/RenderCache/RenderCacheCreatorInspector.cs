@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using Unity.AnimeToolbox.Editor;
+using Unity.EditorCoroutines.Editor;
 using UnityEditor.Timeline;
 using UnityEditor.UIElements;
 using UnityEditorInternal;
@@ -70,6 +72,23 @@ internal class RenderCacheCreatorInspector : Editor {
             
         }
 
+        
+        
+        //Loop time 
+        m_timePerFrame = 1.0f / timelineAsset.editorSettings.fps;
+        m_updateDirectorTime = director.initialTime;
+        EditorCoroutineUtility.StartCoroutine(UpdateRenderCacheCoroutine(), this);
+
+
+    }
+
+    private double m_updateDirectorTime = 0;
+    private double m_timePerFrame = 0;
+    
+//----------------------------------------------------------------------------------------------------------------------    
+    
+    IEnumerator UpdateRenderCacheCoroutine() {
+
         //Assign render texture
         Camera cam = m_asset.GetCamera();
         RenderTexture prevTargetTexture = cam.targetTexture;
@@ -78,23 +97,20 @@ internal class RenderCacheCreatorInspector : Editor {
         cam.targetTexture = rt;
         
         
-        
-        //Loop time 
-        double timePerFrame = 1.0f / timelineAsset.editorSettings.fps;
-        double curTime = director.initialTime;
-        double endTime = curTime + director.duration;
-        int fileCounter = 0;
-        while (curTime < endTime) {
-            SetDirectorTime(director,curTime);
-            Debug.Log("Setting Director to time: " + curTime);
+        int    fileCounter = 0;
+        PlayableDirector director = m_asset.GetDirector();
+        while (m_updateDirectorTime <= director.initialTime + director.duration) {
+            SetDirectorTime(director,m_updateDirectorTime);
+            m_updateDirectorTime += m_timePerFrame;
+
             Capture(cam, fileCounter.ToString("000"));
+            Debug.Log("Time: " + m_updateDirectorTime + " " + (m_updateDirectorTime < director.initialTime + director.duration).ToString());
+            yield return null;
             ++fileCounter;
-            curTime += timePerFrame;
         }
-
-
+        
         cam.targetTexture = prevTargetTexture;
-
+        
     }
     
     private static void SetDirectorTime(PlayableDirector director, double time) {
