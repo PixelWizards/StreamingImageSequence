@@ -1,11 +1,14 @@
 <UXML xmlns="UnityEngine.UIElements">
+
+    <VisualElement name="FieldsContainer" class="render-cache-section-container">
+    </VisualElement>
     
-    <VisualElement>
+    <VisualElement class="render-cache-section-container"> 
         <Button text="Verify Manual Edit" name="VerifyButton" class="render-cache-button"/>
 <!--        <Label text="Render Cache was manually modified"/>  --> 
     </VisualElement>
 
-    <VisualElement class="render-cache-update-container">
+    <VisualElement class="render-cache-section-container">
         <Button text="Update" name="UpdateButton" class="render-cache-button"/>
     </VisualElement>
     

@@ -6,6 +6,6 @@
     align-self: flex-start;
 }
 
-.render-cache-update-container {
+.render-cache-section-container {
     margin-top: 15px;
 }
