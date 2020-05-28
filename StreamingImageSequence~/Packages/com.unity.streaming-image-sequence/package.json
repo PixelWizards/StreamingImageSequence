@@ -5,8 +5,9 @@
     "version": "0.1.4-preview",
     "dependencies": {
         "com.unity.anime-toolbox": "0.1.2-preview",
+        "com.unity.editorcoroutines": "1.0.0",
         "com.unity.timeline": "1.2.14",
-        "com.unity.ugui": "1.0.0"
+        "com.unity.ugui": "1.0.0"        
     }, 
     "description": "Streaming Image Sequence is a package for playing sequential image sequences in Unity Timeline easily without making Unity 2D Sprites.",
     "author": "Unity Technology Japan",
